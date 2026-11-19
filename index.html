@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Samarth Kulkarni — Computer Science Engineering student, builder and technology enthusiast.">
+  <meta name="theme-color" content="#0b1220">
+  <title>Samarth Kulkarni | Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #111c2e;
+      --panel-2: #152238;
+      --text: #edf2f8;
+      --muted: #a7b4c7;
+      --accent: #ff8a3d;
+      --accent-light: #ffb06f;
+      --line: rgba(255,255,255,.10);
+      --max: 1120px;
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .site-header {
+      position: sticky; top: 0; z-index: 20; background: rgba(11,18,32,.88);
+      backdrop-filter: blur(14px); border-bottom: 1px solid var(--line);
+    }
+    .nav-wrap { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { font-size: 1.12rem; font-weight: 800; letter-spacing: -.04em; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: .93rem; transition: color .2s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-light); }
+    .menu-toggle {
+      display: none; border: 1px solid var(--line); color: var(--text); background: var(--panel);
+      width: 44px; height: 42px; border-radius: 11px; cursor: pointer; font-size: 1.25rem;
+    }
+    .hero { min-height: 650px; display: grid; align-items: center; padding: 100px 0 90px; position: relative; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; width: 440px; height: 440px; border-radius: 50%;
+      right: -130px; top: 70px; background: rgba(255,138,61,.10); filter: blur(5px); pointer-events: none;
+    }
+    .hero-content { max-width: 760px; position: relative; }
+    .eyebrow { color: var(--accent-light); font-size: .82rem; text-transform: uppercase; letter-spacing: .18em; font-weight: 800; }
+    h1 { font-size: clamp(2.8rem, 7vw, 5.6rem); line-height: 1.04; letter-spacing: -.065em; margin: 18px 0 22px; }
+    h1 span { color: var(--accent); }
+    .hero-copy { color: var(--muted); max-width: 640px; font-size: clamp(1rem, 2vw, 1.18rem); }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 12px 20px; border-radius: 10px; font-weight: 750; border: 1px solid transparent; transition: transform .2s, background .2s, border-color .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: #1c1720; }
+    .btn-primary:hover { background: var(--accent-light); }
+    .btn-secondary { border-color: var(--line); color: var(--text); background: rgba(255,255,255,.025); }
+    .btn-secondary:hover { border-color: var(--accent); }
+    .hero-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 54px; color: var(--muted); font-size: .9rem; }
+    .hero-meta strong { color: var(--text); display: block; font-size: 1.05rem; }
+    section { padding: 88px 0; }
+    .section-heading { margin-bottom: 34px; }
+    .section-heading .eyebrow { margin-bottom: 9px; }
+    h2 { font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1.15; letter-spacing: -.045em; }
+    .section-intro { color: var(--muted); max-width: 650px; margin-top: 12px; }
+    .about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 28px; align-items: stretch; }
+    .about-card, .info-card, .skill-card, .project-card, .contact-card {
+      background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    }
+    .about-card { padding: 30px; }
+    .about-card p { color: var(--muted); margin-top: 14px; }
+    .about-card p:first-of-type { margin-top: 0; }
+    .info-card { padding: 26px; display: grid; align-content: center; gap: 18px; }
+    .info-row { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 13px; }
+    .info-row:last-child { border: 0; padding-bottom: 0; }
+    .info-row span:first-child { color: var(--muted); }
+    .info-row span:last-child { font-weight: 650; text-align: right; }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .skill-card { padding: 24px; }
+    .skill-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; background: rgba(255,138,61,.13); color: var(--accent); font-weight: 900; margin-bottom: 18px; }
+    .skill-card h3 { font-size: 1.08rem; margin-bottom: 8px; }
+    .skill-card p { color: var(--muted); font-size: .94rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+    .tag { color: #d8e0ec; background: var(--panel-2); border: 1px solid var(--line); padding: 5px 10px; border-radius: 999px; font-size: .78rem; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card { padding: 26px; display: flex; flex-direction: column; min-height: 310px; transition: transform .2s, border-color .2s; }
+    .project-card:hover { transform: translateY(-5px); border-color: rgba(255,138,61,.55); }
+    .project-number { color: var(--accent); font-weight: 850; letter-spacing: .12em; font-size: .78rem; }
+    .project-card h3 { font-size: 1.25rem; margin: 14px 0 10px; }
+    .project-card p { color: var(--muted); font-size: .94rem; }
+    .project-card .skill-tags { margin-top: 20px; }
+    .project-link { color: var(--accent-light); font-weight: 700; margin-top: auto; padding-top: 24px; font-size: .9rem; }
+    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 20px; }
+    .contact-card { padding: 28px; }
+    .contact-card p { color: var(--muted); }
+    .contact-detail { display: flex; align-items: center; gap: 12px; margin-top: 22px; color: var(--accent-light); overflow-wrap: anywhere; }
+    .contact-form { display: grid; gap: 14px; }
+    .contact-form label { display: block; color: var(--muted); font-size: .88rem; margin-bottom: 6px; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; background: #0c1627; color: var(--text); border: 1px solid var(--line);
+      border-radius: 10px; padding: 13px 14px; outline: none; font: inherit;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+    .contact-form textarea { min-height: 125px; resize: vertical; }
+    .contact-form small { color: var(--muted); }
+    footer { border-top: 1px solid var(--line); padding: 25px 0; color: var(--muted); font-size: .88rem; }
+    .footer-wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .footer-wrap span { color: var(--accent-light); }
+    @media (max-width: 820px) {
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .skills-grid, .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero { min-height: 590px; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(100% - 32px, var(--max)); }
+      .nav-wrap { min-height: 68px; }
+      .menu-toggle { display: inline-grid; place-items: center; }
+      .nav-links {
+        display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 18px 22px 22px;
+        background: #0d1728; border-bottom: 1px solid var(--line); flex-direction: column; align-items: flex-start; gap: 18px;
+      }
+      .nav-links.open { display: flex; }
+      .hero { min-height: 570px; padding: 78px 0 65px; }
+      .hero-meta { gap: 18px; margin-top: 40px; }
+      section { padding: 68px 0; }
+      .skills-grid, .projects-grid { grid-template-columns: 1fr; }
+      .about-card, .info-card, .skill-card, .project-card, .contact-card { padding: 22px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container nav-wrap" aria-label="Main navigation">
+      <a class="brand" href="#home">Samarth<span>.</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <p class="eyebrow">Computer Science Engineering Student</p>
+          <h1>Building ideas into <span>useful experiences.</span></h1>
+          <p class="hero-copy">I'm Samarth Kulkarni, a CSE student interested in software, data and applied AI. I enjoy learning how technology works and turning concepts into practical projects.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">Explore my work <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-secondary" href="#contact">Get in touch</a>
+          </div>
+          <div class="hero-meta">
+            <div><strong>CSE</strong>Undergraduate</div>
+            <div><strong>3+</strong>Project areas explored</div>
+            <div><strong>Curious</strong>Always learning</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">A little about me</p>
+          <h2>About</h2>
+          <p class="section-intro">A student focused on building a strong technical foundation through hands-on work.</p>
+        </div>
+        <div class="about-grid">
+          <article class="about-card">
+            <p>I'm pursuing a Bachelor's degree in Computer Science and Engineering. My interests include web technologies, machine learning and understanding how software systems are designed.</p>
+            <p>I've worked on projects involving frontend development, APIs, database integration and computer-vision-based engagement analysis. I’m currently strengthening my fundamentals while improving the way I design, build and explain technical solutions.</p>
+            <p>I value practical learning, clear problem-solving and building things that solve a real need.</p>
+          </article>
+          <aside class="info-card" aria-label="Quick information">
+            <div class="info-row"><span>Education</span><span>B.E. Computer Science</span></div>
+            <div class="info-row"><span>Based in</span><span>Karnataka, India</span></div>
+            <div class="info-row"><span>Interests</span><span>Web · AI · Data</span></div>
+            <div class="info-row"><span>Currently</span><span>Learning & building</span></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">What I work with</p>
+          <h2>Skills</h2>
+          <p class="section-intro">A growing toolkit across programming, web development and applied machine learning.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <div class="skill-icon">01</div>
+            <h3>Programming</h3>
+            <p>Core programming concepts and problem-solving practice.</p>
+            <div class="skill-tags"><span class="tag">Java</span><span class="tag">Python</span><span class="tag">C</span><span class="tag">C++</span></div>
+          </article>
+          <article class="skill-card">
+            <div class="skill-icon">02</div>
+            <h3>Web Development</h3>
+            <p>Building responsive interfaces and connecting them to backend services.</p>
+            <div class="skill-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">Express</span></div>
+          </article>
+          <article class="skill-card">
+            <div class="skill-icon">03</div>
+            <h3>Data & AI</h3>
+            <p>Exploring model training, evaluation and data-driven applications.</p>
+            <div class="skill-tags"><span class="tag">PyTorch</span><span class="tag">MySQL</span><span class="tag">Machine Learning</span><span class="tag">Computer Vision</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Selected work</p>
+          <h2>Projects</h2>
+          <p class="section-intro">A few projects that reflect what I've been learning and building. Add your repository links when they are ready.</p>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card">
+            <span class="project-number">PROJECT 01</span>
+            <h3>EngageGuard</h3>
+            <p>A student engagement analysis prototype using video-frame sequences and deep learning. It presents engagement estimates and highlights cases for instructor review rather than making automatic misconduct decisions.</p>
+            <div class="skill-tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">Streamlit</span><span class="tag">Bi-GRU</span></div>
+            <a class="project-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">Add GitHub link ↗</a>
+          </article>
+          <article class="project-card">
+            <span class="project-number">PROJECT 02</span>
+            <h3>Pharmacy Management</h3>
+            <p>A web application project with a React frontend, Express APIs and MySQL integration to support pharmacy-related data and workflows.</p>
+            <div class="skill-tags"><span class="tag">React</span><span class="tag">Express</span><span class="tag">MySQL</span><span class="tag">REST API</span></div>
+            <a class="project-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">Add GitHub link ↗</a>
+          </article>
+          <article class="project-card">
+            <span class="project-number">PROJECT 03</span>
+            <h3>Machine Learning Experiments</h3>
+            <p>An ongoing learning project exploring pretrained models, model fine-tuning and evaluation workflows for applied machine learning tasks.</p>
+            <div class="skill-tags"><span class="tag">Python</span><span class="tag">Pretrained Models</span><span class="tag">Model Evaluation</span></div>
+            <a class="project-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">Add GitHub link ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Let's connect</p>
+          <h2>Contact</h2>
+          <p class="section-intro">Have an opportunity, collaboration idea or question? Send me a message.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Get in touch</h3>
+            <p style="margin-top:10px">The easiest way to reach me is by email. You can also add your professional and code profiles here.</p>
+            <a class="contact-detail" href="mailto:your.email@example.com">✉ <span>your.email@example.com</span></a>
+            <a class="contact-detail" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">↗ <span>LinkedIn profile</span></a>
+            <a class="contact-detail" href="https://github.com/" target="_blank" rel="noopener noreferrer">↗ <span>GitHub profile</span></a>
+          </div>
+          <div class="contact-card">
+            <form class="contact-form" id="contactForm">
+              <div><label for="visitorName">Your name</label><input id="visitorName" name="name" type="text" placeholder="Enter your name" required></div>
+              <div><label for="visitorEmail">Your email</label><input id="visitorEmail" name="email" type="email" placeholder="you@example.com" required></div>
+              <div><label for="visitorMessage">Message</label><textarea id="visitorMessage" name="message" placeholder="Write your message..." required></textarea></div>
+              <button class="btn btn-primary" type="submit">Prepare email ↗</button>
+              <small>This opens your email app with the message filled in. Replace the placeholder email address in the HTML first.</small>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap">
+      <p>© <span id="year"></span> Samarth Kulkarni. Built with HTML, CSS & JavaScript.</p>
+      <p>Designed to keep learning <span>→</span></p>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+      menuToggle.textContent = isOpen ? "×" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.getElementById("contactForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const name = document.getElementById("visitorName").value.trim();
+      const email = document.getElementById("visitorEmail").value.trim();
+      const message = document.getElementById("visitorMessage").value.trim();
+      const subject = encodeURIComponent("Portfolio contact from " + name);
+      const body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\n" + message);
+      window.location.href = "mailto:your.email@example.com?subject=" + subject + "&body=" + body;
+    });
+  </script>
+</body>
+</html>
